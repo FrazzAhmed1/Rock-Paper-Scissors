@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f7fa, #ffffff);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px;
+            color: #222;
+        }
+
+        p {
+            font-size: 1.3rem;
+            margin: 20px 0;
+        }
+
+        button {
+            background: linear-gradient(145deg, #00bfa5, #1de9b6);
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1rem;
+            border-radius: 10px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #1de9b6, #00bfa5);
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .js-result {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #d84315;
+            margin-top: 20px;
+        }
+
+        .js-score {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #37474F;
+        }
+
+        .js-choice {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #00796B;
+        }
+    </style>
+</head> 
+<body>
+    <!-- Title for the game -->
+    <p> Rock Paper Scissors</p>
+    
+    <!-- Buttons for user to select their choice -->
+    <button onclick="
+        userChoice = 'Rock';
+        Display(userChoice);
+    "> Rock</button>
+    
+    <button onclick="
+        userChoice = 'Paper';
+        Display(userChoice);
+    "> Paper</button>
+
+    <button onclick="
+        userChoice = 'Scissors';
+        Display(userChoice);
+    "> Scissors</button>
+
+    <p class="js-choice"></p>
+    <p class="js-result"></p>
+    <p class="js-score"></p>
+
+    <button onclick="
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        localStorage.removeItem('score');
+        updateScore();
+    "> Reset</button>
+    
+    <script>
+        let score = JSON.parse(localStorage.getItem('score')) 
+
+        if (!score) {
+            score = {
+                wins: 0,
+                losses: 0,
+                ties: 0
+            };
+        }
+        updateScore();
+
+        let userChoice1 = '';
+        let computerChoice = '';
+        // function choice to make computer move and also display the winner and show statistics
+        function Display(userChoice) {
+            computerChoice = getChoice();
+            choice();
+            if (computerChoice === 'Rock' && userChoice === 'Rock' || computerChoice === 'Paper' && userChoice === 'Paper' || computerChoice === 'Scissors' && userChoice === 'Scissors') {
+                winner('It\'s a tie!');
+                score.ties++;
+            } else if (computerChoice === 'Paper' && userChoice === 'Rock' || computerChoice === 'Rock' && userChoice === 'Scissors' || computerChoice === 'Scissors' && userChoice === 'Paper') {
+                winner('Computer wins!');
+                score.losses++;
+            } else {
+                winner('You win!'); 
+                score.wins++;
+            }
+
+            localStorage.setItem('score', JSON.stringify(score));
+            updateScore();
+        }
+        // function to get computer choice
+        function getChoice() {
+            let computerChoice = Math.floor(Math.random() * 3);
+            if (computerChoice === 0) {
+                computerChoice = 'Rock';
+            } else if (computerChoice === 1) {
+                computerChoice = 'Paper';  
+            } else {
+                computerChoice = 'Scissors';
+            }
+            return computerChoice;
+        }
+        
+        function choice() {
+            document.querySelector('.js-choice').innerHTML = `You chose ${userChoice} and computer chose ${computerChoice}`;
+        }
+
+        function winner(message) {
+            document.querySelector('.js-result').innerHTML = message;
+        }
+
+        function updateScore() {
+            document.querySelector('.js-score').innerHTML = `Losses: ${score.losses} Wins: ${score.wins} Ties: ${score.ties}`;
+        }
+    </script>
+</body>
+</html>
