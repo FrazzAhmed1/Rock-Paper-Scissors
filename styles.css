@@ -1,0 +1,53 @@
+body {
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 50px;
+    color: #222;
+}
+
+p {
+    font-size: 1.3rem;
+    margin: 20px 0;
+}
+
+button {
+    background: linear-gradient(145deg, #00bfa5, #1de9b6);
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+button:hover {
+    background: linear-gradient(145deg, #1de9b6, #00bfa5);
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.js-result {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #d84315;
+    margin-top: 20px;
+}
+
+.js-score {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #37474F;
+}
+
+.js-choice {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #00796B;
+}
