@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- Title for the game -->
+    <p> Rock Paper Scissors</p>
+
+    <!-- Buttons for user to select their choice -->
+    <button onclick="
+        userChoice = 'Rock';
+        Display(userChoice);
+    "> Rock</button>
+
+    <button onclick="
+        userChoice = 'Paper';
+        Display(userChoice);
+    "> Paper</button>
+
+    <button onclick="
+        userChoice = 'Scissors';
+        Display(userChoice);
+    "> Scissors</button>
+
+    <p class="js-choice"></p>
+    <p class="js-result"></p>
+    <p class="js-score"></p>
+
+    <button onclick="
+        score.wins = 0;
+        score.losses = 0;
+        score.ties = 0;
+        localStorage.removeItem('score');
+        updateScore();
+    "> Reset</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
